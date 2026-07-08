@@ -2,7 +2,7 @@
   id: "vue",
   name: "Vue",
   language: "TypeScript",
-  group: "JS / TS",
+  group: "Web UI (JS / TS)",
   navLabel: "Vue",
   color: "#42b883",
   readMinutes: 28,

@@ -2,8 +2,8 @@
   id: "pyside",
   name: "PySide6 (Qt)",
   language: "Python",
-  group: "Python",
-  navLabel: "PySide6 (Qt)",
+  group: "Desktop GUI",
+  navLabel: "PySide6 (Python)",
   color: "#41cd52",
   readMinutes: 30,
   tagline: "**Qt 6 for Python** — build real native desktop apps with widgets, **signals & slots**, model/view, threading and QSS styling. Official bindings (`pip install PySide6`), LGPL.",
@@ -99,7 +99,7 @@
         { type: "code", lang: "python", code: "from PySide6.QtCore import QObject, Signal, Slot\n\nclass Worker(QObject):\n    progress = Signal(int)                    # signal carrying an int\n    finished = Signal(str)                    # signal carrying a str\n    error    = Signal(str)\n\n    @Slot()                                   # optional but recommended decorator\n    def run(self):\n        for i in range(101):\n            self.progress.emit(i)             # notify listeners\n        self.finished.emit(\"done\")\n\nw = Worker()\nw.progress.connect(lambda v: print(\"progress\", v))\nw.finished.connect(lambda msg: print(msg))\nw.run()" },
         { type: "list", items: [
           "**`@Slot()`** decorates a method as a slot. It's optional for plain Python callables but improves performance and is **required** for cross-thread queued connections and QML-exposed methods. Annotate the arg types: `@Slot(int)`.",
-          "**Overloaded signals**: pass the type to disambiguate — e.g. `combo.currentIndexChanged[int]` vs `[str]` (though most Qt6 signals now have a single signature).",
+          "**Overloaded signals**: when a signal has multiple C++ overloads, index it with the type to disambiguate — e.g. `someSignal[int]` vs `someSignal[str]`. In Qt6 many old overloads were dropped: `QComboBox.currentIndexChanged` is now **`int`-only** (use `currentTextChanged(str)` for the text), so you rarely need the `[type]` syntax anymore.",
           "**Disconnect** with `signal.disconnect(slot)` or `signal.disconnect()` (all). Connections are also dropped automatically when either object is destroyed.",
           "Signals return **nothing** — they are fire-and-forget notifications, not function calls with a return value."
         ] },
@@ -289,7 +289,7 @@
     { name: "qtawesome", why: "Font Awesome / Material / Elusive icon fonts exposed as QIcon (qta.icon('fa5s.save')) — no PNG assets needed" },
     { name: "pyqtgraph", why: "fast, real-time plotting and image display widgets built on Qt — far quicker than matplotlib for live data" },
     { name: "matplotlib (Qt backend)", why: "embed publication-quality static plots in a widget via FigureCanvasQTAgg" },
-    { name: "QScintilla / QtWebEngine", why: "advanced code-editor component and an embedded Chromium web view for rich content" },
+    { name: "QtWebEngine", why: "embedded Chromium web view (`PySide6.QtWebEngineWidgets`) for rendering rich HTML content in-app" },
     { name: "PyInstaller", why: "freeze the app into a standalone executable (--windowed --onefile); the most common packaging route" },
     { name: "Nuitka (via pyside6-deploy)", why: "compile Python to C for smaller/faster native binaries; pyside6-deploy drives it and bundles Qt plugins/QML" },
     { name: "pytest-qt", why: "test PySide/PyQt GUIs — qtbot fixture to simulate clicks/keys and wait for signals" },

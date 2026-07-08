@@ -2,7 +2,7 @@
   id: "preact",
   name: "Preact",
   language: "JavaScript",
-  group: "JS / TS",
+  group: "Web UI (JS / TS)",
   navLabel: "Preact",
   color: "#673ab8",
   readMinutes: 22,

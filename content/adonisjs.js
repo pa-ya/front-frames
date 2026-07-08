@@ -31,7 +31,7 @@
           ["Tests", "Japa runner", "Jest/Vitest + supertest"],
           ["CLI / codegen", "`node ace`", "artisan / rails"]
         ] },
-        { type: "callout", variant: "note", text: "This deck targets **AdonisJS v6** (ESM, VineJS, Lucid, Japa, Inertia). **v7** shipped early 2026 as an *incremental* upgrade — same idioms, mostly package bumps (Lucid 19, better Vite HMR, native `Response` returns), so everything here carries forward. The real trap is **v5**: it used CommonJS, `@ioc:` imports, the old `@ioc:Adonis/Core/Validator`, and `.ioc.rc` — v5 tutorials will not compile on v6. Don't mix them." },
+        { type: "callout", variant: "note", text: "This deck targets **AdonisJS v6** (ESM, VineJS, Lucid, Japa, Inertia). **v7** shipped early 2026 (Feb 2026) as an *incremental*, mostly source-compatible upgrade — its headline additions are **end-to-end type safety**, zero-config **OpenTelemetry** (`@adonisjs/otel`), `@adonisjs/content` + `edge-markdown`, and a rewritten Youch error page. The v6 idioms in this deck carry forward. The real trap is **v5**: it used CommonJS, `@ioc:` imports, the old `@ioc:Adonis/Core/Validator`, and `.ioc.rc` — v5 tutorials will not compile on v6. Don't mix them." },
         { type: "callout", variant: "tip", text: "The single best habit: run `node ace list` to see every generator and command, and prefer `node ace make:*` over hand-creating files. The generators wire up imports, register providers, and follow the naming conventions the rest of the framework relies on." }
       ]
     },

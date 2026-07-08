@@ -2,7 +2,7 @@
   id: "tanstack",
   name: "TanStack",
   language: "TS / JS",
-  group: "JS / TS",
+  group: "Web UI (JS / TS)",
   navLabel: "TanStack",
   color: "#ff4154",
   readMinutes: 30,
@@ -23,7 +23,7 @@
           ["**Virtual**", "windowing/virtualization for huge lists & grids", "`@tanstack/react-virtual`"],
           ["**Start**", "fullstack React framework: Router + Vite + server functions", "`@tanstack/react-start`"]
         ] },
-        { type: "callout", variant: "note", text: "This deck targets the **current stable line (July 2026)**: **Query v5**, **Router v1**, **Table v8**, **Form v1**, **Virtual v3**, and **Start v1** (shipped 1.0 in March 2026). Query is by far the most-used member — most of this deck is about it." },
+        { type: "callout", variant: "note", text: "This deck targets the **current stable line (July 2026)**: **Query v5**, **Router v1**, **Table v8**, **Form v1**, **Virtual v3**, and **Start v1** (in **Release Candidate** as of mid-2026 — not yet a tagged stable 1.0). Query is by far the most-used member — most of this deck is about it." },
         { type: "heading", text: "\"Headless\" — why it matters" },
         { type: "p", text: "Headless means the library returns data and callbacks and **zero DOM**. TanStack Table doesn't render a `<table>` — it hands you row models and you map over them. This is the opposite of AG Grid or MUI DataGrid. The payoff: total control over markup, styling and accessibility; the cost: you write more glue. Query is \"headless\" too — it manages the cache and gives you `{ data, isPending, ... }`; you decide what to render." },
         { type: "callout", variant: "tip", text: "Reach for **Query** the moment you `fetch` in a component — it is the biggest quality-of-life upgrade in the suite. Add **Router** when you want typed routes/search params (especially with Query). **Table/Virtual/Form** are independent — adopt them à la carte. **Start** is the all-in bet: a Next.js alternative built on Router." }
@@ -239,7 +239,7 @@
       title: "TanStack Start: the fullstack framework",
       level: "deep",
       body: [
-        { type: "p", text: "**TanStack Start** (v1, shipped March 2026) is a fullstack React framework built on **TanStack Router + Vite**, positioned as a type-safe alternative to Next.js. It adds SSR/streaming, and **server functions** — isomorphic functions you write once and call from anywhere (loaders, components, other server functions)." },
+        { type: "p", text: "**TanStack Start** (v1, in **Release Candidate** as of mid-2026 — API stable, not yet a tagged 1.0) is a fullstack React framework built on **TanStack Router + Vite**, positioned as a type-safe alternative to Next.js. It adds SSR/streaming, and **server functions** — isomorphic functions you write once and call from anywhere (loaders, components, other server functions)." },
         { type: "code", lang: "bash", code: "npm i @tanstack/react-start" },
         { type: "code", lang: "tsx", code: "import { createServerFn } from \"@tanstack/react-start\";\n\n// runs ONLY on the server; callable from client, loaders, or other server fns\nexport const getUser = createServerFn({ method: \"GET\" })\n  .validator((id: string) => id)               // validate/typed input\n  .handler(async ({ data: id }) => {\n    return db.user.findUnique({ where: { id } }); // DB access, secrets, etc. stay server-side\n  });\n\n// in a route loader:\nexport const Route = createFileRoute(\"/users/$id\")({\n  loader: ({ params }) => getUser({ data: params.id }),\n  component: () => <User user={Route.useLoaderData()} />,\n});" },
         { type: "list", items: [

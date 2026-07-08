@@ -27,26 +27,58 @@
       title: "Cross-framework comparison",
       level: "core",
       body: [
-        { type: "p", text: "A one-glance matrix of the **UI frameworks** in this deck. \"Rendering model\" is how the framework turns state into pixels; \"Reactivity\" is how it tracks what changed. (**C++ WebAssembly** is a *compile target + interop layer*, not a UI framework, and **Solidity** is a smart-contract language — both sit outside these UI axes; see the signature-feature list below.)" },
+        { type: "p", text: "A one-glance matrix of the **UI frameworks** in this deck. \"Rendering model\" is how the framework turns state into pixels; \"Reactivity\" is how it tracks what changed. The rest of the deck (fullstack meta-frameworks, GraphQL, the Python GUI/game libs, and the EVM/TON smart-contract stacks) sit outside these UI axes — those are summarised in the **signature-feature** table below." },
         { type: "table", headers: ["Framework", "Language", "Rendering model", "Reactivity / state", "Typical router"], rows: [
           ["Preact", "JavaScript", "Virtual DOM (~3kB)", "hooks + **signals**", "preact-iso"],
           ["React", "JS / TS", "Virtual DOM + Fiber", "hooks + external stores", "React Router v7"],
           ["Angular", "TypeScript", "DOM + change detection", "**signals** + RxJS", "built-in Router"],
           ["Vue", "JS / TS", "compiler-informed VDOM", "`ref` / `reactive`", "Vue Router"],
           ["Yew", "Rust → WASM", "Virtual DOM", "hooks (`use_state`)", "yew-router"],
-          ["Flutter", "Dart → native/canvas", "retained widget tree", "`setState` / Riverpod / Bloc", "Navigator / go_router"]
+          ["Flutter", "Dart → native/canvas", "retained widget tree", "`setState` / Riverpod / Bloc", "Navigator / go_router"],
+          ["Tkinter / PySide6", "Python → native widgets", "retained widget tree", "explicit vars / signals-slots", "n/a (window/frame nav)"]
         ] },
+        { type: "callout", variant: "note", text: "Notice the two reactivity families converging: **signals** (Preact, Angular, Vue's `ref`, Solid, Leptos) track dependencies at the value level, while **VDOM diffing** (React, Preact, Yew) re-runs components and reconciles. Modern React leans on the compiler; everyone else is adopting signals." },
+        { type: "heading", text: "Desktop GUI toolkits — at a glance" },
+        { type: "p", text: "The **Desktop GUI** group spans five languages. They split cleanly into two paradigms: **retained** (you build a widget tree once; the toolkit keeps and redraws it) vs **immediate** (you re-describe the whole UI every frame from your state — no persistent widget objects)." },
+        { type: "table", headers: ["Toolkit", "Language", "Paradigm", "Native look?", "Mobile?", "Package with"], rows: [
+          ["Qt (Widgets)", "C++", "retained (widgets)", "native-ish + themable", "yes (Qt for iOS/Android)", "windeployqt / CMake"],
+          ["PySide6", "Python", "retained (Qt widgets)", "native-ish + themable", "limited", "PyInstaller / Nuitka"],
+          ["Tkinter", "Python", "retained (Tk widgets)", "themed via `ttk`", "no", "PyInstaller"],
+          ["egui", "Rust", "**immediate** mode", "custom-drawn (uniform)", "via winit (rough)", "cargo / cargo-bundle"],
+          ["Fyne", "Go", "retained (own canvas)", "custom (Material-ish)", "yes (Android/iOS)", "`fyne package`"]
+        ] },
+        { type: "callout", variant: "tip", text: "Rule of thumb: **Qt** for the richest, most native desktop apps (and when you'll also ship Python via PySide6); **Tkinter** for a zero-dependency Python utility; **egui** for a Rust tool/debug UI or a game overlay (immediate mode is the easiest to reason about); **Fyne** for a pure-Go app that also targets mobile. **Flutter** (its own section) is the option when mobile is the primary target." },
+        { type: "heading", text: "Game-dev libraries — at a glance" },
+        { type: "table", headers: ["Library", "Language", "Level", "You write", "Best for"], rows: [
+          ["Pygame (pygame-ce)", "Python", "high-level over SDL", "the game loop + blits", "learning, prototypes, 2D games/jams"],
+          ["SDL (SDL3)", "C++", "low-level multimedia", "loop + GPU render + input", "shipped 2D games, engines, ports, emulators"]
+        ] },
+        { type: "callout", variant: "note", text: "**Pygame is a thin wrapper over SDL** — same mental model (own the loop, surfaces/textures, poll events, fixed timestep), so learning one teaches the other. Move to **SDL/C++** when you need raw performance, GPU rendering, gamepad/console reach, or to embed in a larger C++ engine. **SFML** is the friendlier object-oriented C++ alternative to SDL if you prefer classes over C APIs." },
+        { type: "heading", text: "Signature feature to remember — every tech in the deck" },
         { type: "table", headers: ["Tech", "Signature feature to remember"], rows: [
           ["Preact", "Tiny React-compatible core + `@preact/signals`; `preact/compat` aliases React libraries"],
           ["React", "Components + hooks; v19 adds Actions, `use()`, and Server Components"],
           ["Angular", "Standalone components + DI + signals + the `@if`/`@for` control flow"],
           ["Vue", "Single-file components + Composition API `<script setup>`; `ref()` reactivity"],
+          ["TanStack", "Headless, framework-agnostic primitives: Query (async cache), Router, Table, Form, Virtual, Start"],
+          ["AdonisJS", "Batteries-included Node MVC: Lucid ORM, VineJS validation, Edge templates, first-party auth"],
+          ["Wasp", "Config-as-code (`main.wasp.ts`) generates a full React + Node + Prisma app from declarations"],
           ["Yew", "React-style components in Rust via the `html!` macro, compiled to WASM"],
           ["C++ WebAssembly", "Emscripten toolchain; `Embind`/`val` for JS↔C++ interop (no single UI framework)"],
           ["Flutter", "Everything is a widget; UI = f(state); one Dart codebase → mobile/web/desktop"],
-          ["Solidity", "EVM smart contracts, tested & shipped with **Foundry**; pair with a frontend via viem/wagmi"]
-        ] },
-        { type: "callout", variant: "note", text: "Notice the two reactivity families converging: **signals** (Preact, Angular, Vue's `ref`, Solid, Leptos) track dependencies at the value level, while **VDOM diffing** (React, Preact, Yew) re-runs components and reconciles. Modern React leans on the compiler; everyone else is adopting signals." }
+          ["Qt (C++)", "The C++ GUI standard: signals & slots + moc, Widgets **and** QML/Qt Quick, parent-child ownership"],
+          ["PySide6 (Python)", "Full Qt6 for Python; signals & slots, model/view, `QThread` for off-UI work"],
+          ["Tkinter", "Python's built-in GUI; `ttk` themed widgets + `pack`/`grid`/`place` geometry managers"],
+          ["egui (Rust)", "Immediate-mode GUI: UI rebuilt every frame from `&mut self`; native + WASM via eframe"],
+          ["Fyne (Go)", "Pure-Go cross-platform GUI; data binding + `fyne.Do` for thread-safe UI updates; ships mobile"],
+          ["Pygame", "2D game loop + surfaces/sprites; `convert()`/`convert_alpha()` and a fixed-step clock"],
+          ["SDL (C++)", "Low-level cross-platform loop + GPU 2D render; SDL3 renamed much of SDL2 (SDL_RenderTexture, SDL_FRect)"],
+          ["GraphQL", "One typed schema (SDL) + resolvers; client asks for exactly the fields it needs; watch N+1 (DataLoader)"],
+          ["Solidity", "EVM smart contracts, tested & shipped with **Foundry**; pair with a frontend via viem/wagmi"],
+          ["EVM Clients (TS)", "`viem` (+ `wagmi` React hooks) for typed reads/writes, wallet connect, and ABI-typed contracts"],
+          ["Tact", "TON's high-level contract language; actor model, typed messages, `receive()` handlers, Blueprint SDK"],
+          ["FunC", "TON's low-level contract language; explicit cells/slices/builders and stack-based semantics"]
+        ] }
       ]
     },
     {
@@ -62,9 +94,11 @@
           "**Weather widget** — fetch a public API, render **loading / error / empty / success** states properly. The four states everyone forgets.",
           "**GitHub-user / movie search** — a **debounced** search box → fetch → paginated results. Effects, cleanup, and race-condition handling.",
           "**Stopwatch / countdown timer** — `setInterval` inside an effect with correct **cleanup**. The classic effect-lifecycle drill.",
-          "**Tic-tac-toe** — derive the winner from board state (no duplicated state), immutable updates, time-travel history."
+          "**Tic-tac-toe** — derive the winner from board state (no duplicated state), immutable updates, time-travel history.",
+          "**Desktop calculator / note-taker** *(Desktop GUI)* — a native window with inputs, buttons and a menu; state in memory, saved to a file. Build it in **Qt**, **Tkinter**, **egui** or **Fyne** to feel each toolkit's layout system and event model.",
+          "**Pong or Snake** *(Game dev)* — the \"hello game loop\": a fixed-timestep loop, keyboard input, collision and a score. Build in **Pygame**, then port to **SDL/C++** to feel the same loop one level lower."
         ] },
-        { type: "callout", variant: "tip", text: "Add the same two things to every minimal project: **an async data source** (loading/error states) and **one piece of URL state** (a route param or query the UI reads). They're the two things every framework does differently and are worth muscle-memory." }
+        { type: "callout", variant: "tip", text: "Add the same two things to every minimal *web* project: **an async data source** (loading/error states) and **one piece of URL state** (a route param or query the UI reads). For **desktop/game** builds the two muscle-memory drills are instead **off-thread work** (never block the UI/game loop) and a **clean update→render split**." }
       ]
     },
     {
@@ -79,9 +113,11 @@
           "**Analytics dashboard** — fetch data, cache it, filter by date range, and draw a couple of charts. Data fetching + caching + derived/computed values.",
           "**Movie explorer (TMDB)** — list → detail routing, favorites in persisted state, infinite scroll or pagination. Great for router params + data caching.",
           "**Multi-step form wizard** — validated steps, a progress indicator, and review-before-submit. Form state, validation, and cross-step state.",
-          "**Wallet dApp** — connect a wallet with **viem/wagmi**, read balances and call an **ERC-20 you wrote in Solidity** (mint/transfer), and show live tx status. Ties the Solidity section to a real UI."
+          "**Wallet dApp** — connect a wallet with **viem/wagmi**, read balances and call an **ERC-20 you wrote in Solidity** (mint/transfer), and show live tx status. Ties the Solidity section to a real UI.",
+          "**Desktop file/image browser** *(Desktop GUI)* — a list/tree pane + preview pane, **background loading off the UI thread** (`QThread` / goroutine + `fyne.Do` / a channel into `update`), and packaging into a shippable binary. The real test of a GUI toolkit's threading + layout story.",
+          "**2D platformer or top-down shooter** *(Game dev)* — sprites, a tilemap, delta-time movement, AABB collision, a sprite sheet, sound effects, and a title→play→pause→game-over **state machine**. Build in **Pygame** or **SDL/C++**."
         ] },
-        { type: "callout", variant: "note", text: "The dApp is the one project that spans this whole deck: write & test the contract with **Foundry**, run **anvil** as a local chain, and drive it from a **React/Vue** frontend. It's the fastest way to internalize the frontend↔contract boundary." }
+        { type: "callout", variant: "note", text: "The dApp is the one project that spans this whole deck: write & test the contract with **Foundry**, run **anvil** as a local chain, and drive it from a **React/Vue** frontend. It's the fastest way to internalize the frontend↔contract boundary. For the **desktop/game** builds, the equivalent lesson is the **off-thread → UI-thread handoff**: every toolkit here has one blessed way to update the UI from a background worker (Qt signals, `fyne.Do`, egui `request_repaint` + channel) — learn it early." }
       ]
     },
     {

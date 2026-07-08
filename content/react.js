@@ -2,7 +2,7 @@
   id: "react",
   name: "React",
   language: "TypeScript",
-  group: "JS / TS",
+  group: "Web UI (JS / TS)",
   navLabel: "React",
   color: "#61dafb",
   readMinutes: 32,

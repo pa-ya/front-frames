@@ -1,6 +1,6 @@
 /* ============================================================
    highlight.js — tiny dependency-free syntax highlighter
-   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, graphql, func, tact, bash, json, sql, env, http
+   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, qml, graphql, func, tact, bash, json, sql, env, http
    ============================================================ */
 (function () {
   "use strict";
@@ -21,6 +21,7 @@
     graphql: ["type","query","mutation","subscription","input","enum","interface","union","scalar","schema","fragment","on","implements","extend","directive","true","false","null","ID","Int","Float","String","Boolean"],
     func: ["int","cell","slice","builder","cont","tuple","var","impure","inline","inline_ref","method_id","global","const","return","if","ifnot","else","elseif","elseifnot","while","do","until","repeat","forall","asm","type","true","false","null","throw","throw_if","throw_unless","recv_internal","recv_external","begin_cell","end_cell","store_uint","load_uint","get_data","set_data","nil"],
     tact: ["contract","trait","message","struct","fun","get","native","receive","init","let","const","return","if","else","while","repeat","until","do","try","catch","foreach","in","map","bounced","external","import","primitive","with","override","virtual","abstract","extends","mutates","extend","public","as","true","false","null","self","send","require","dump","emit","asm","Int","Bool","Address","Cell","Slice","Builder","String","StringBuilder","Context","SendParameters","StateInit"],
+    qml: ["import","property","readonly","default","signal","alias","function","id","if","else","for","while","return","var","let","const","true","false","null","on","as","enum","component","required","pragma"],
   };
 
   const LANG_SET = {
@@ -47,6 +48,7 @@
     gql: new Set(KEYWORDS.graphql),
     func: new Set(KEYWORDS.func),
     tact: new Set([...KEYWORDS.common, ...KEYWORDS.tact]),
+    qml: new Set([...KEYWORDS.common, ...KEYWORDS.qml]),
   };
 
   const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore","graphql","gql"]);

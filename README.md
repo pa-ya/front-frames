@@ -9,17 +9,18 @@ violet/magenta identity and loaded with a different set of (mostly frontend) fra
 
 **Sections** (in sidebar order):
 
-- **JS / TS** — Preact · React · Angular · Vue · TanStack
+- **Web UI (JS / TS)** — Preact · React · Angular · Vue · TanStack
 - **Fullstack** — AdonisJS · Wasp
 - **WebAssembly** — Yew (Rust) · C++ WebAssembly (Emscripten)
 - **Flutter** (Dart) — mobile / web / desktop from one codebase
-- **Python** — Tkinter · PySide6 (Qt) · Pygame
+- **Desktop GUI** — Qt (C++) · PySide6 (Python) · Tkinter (Python) · egui (Rust) · Fyne (Go)
+- **Game dev** — Pygame (Python) · SDL (C++)
 - **GraphQL** — schema-first API query language
 - **EVM** — Solidity (+ Foundry) · EVM clients (TypeScript / viem)
 - **TON** — Tact · FunC (Telegram Open Network smart contracts)
 - **Practice & Projects** — cross-framework comparison + project ideas
 
-Related sections are grouped in the sidebar under a collapsible parent (**JS / TS**, **WebAssembly**). Every framework carries a **"Common headaches & how to handle them"** section covering its real-world pitfalls and the fix for each.
+Related sections are grouped in the sidebar under a collapsible parent (**Web UI (JS / TS)**, **Fullstack**, **WebAssembly**, **Desktop GUI**, **Game dev**, **EVM**, **TON**) — grouped by **purpose** so you can find "how do I build a desktop app / a game / a contract" fast, regardless of language. Every framework carries a **"Common headaches & how to handle them"** section covering its real-world pitfalls and the fix for each.
 
 ## Run it
 

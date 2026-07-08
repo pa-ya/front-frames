@@ -2,7 +2,7 @@
   id: "angular",
   name: "Angular",
   language: "TypeScript",
-  group: "JS / TS",
+  group: "Web UI (JS / TS)",
   navLabel: "Angular",
   color: "#dd0031",
   readMinutes: 30,
