@@ -14,13 +14,14 @@ violet/magenta identity and loaded with a different set of (mostly frontend) fra
 - **WebAssembly** — Yew (Rust) · C++ WebAssembly (Emscripten)
 - **Flutter** (Dart) — mobile / web / desktop from one codebase
 - **Desktop GUI** — Qt (C++) · PySide6 (Python) · Tkinter (Python) · egui (Rust) · Fyne (Go)
-- **Game dev** — Pygame (Python) · SDL (C++) · LÖVE (Lua)
-- **GraphQL** — schema-first API query language
+- **Game dev** — Pygame (Python) · SDL (C++) · LÖVE (Lua) · GameMaker (GML) · Godot (GDScript)
+- **3D graphics** — OpenGL (C++) · wgpu (Rust) · G3N (Go) — real-time 3D + the linear algebra behind it
+- **Odin** — a modern, data-oriented systems language (C alternative, gamedev-friendly)
 - **EVM** — Solidity (+ Foundry) · EVM clients (TypeScript / viem)
 - **TON** — Tact · FunC (Telegram Open Network smart contracts)
 - **Practice & Projects** — cross-framework comparison + project ideas
 
-Related sections are grouped in the sidebar under a collapsible parent (**Web UI (JS / TS)**, **Fullstack**, **WebAssembly**, **Desktop GUI**, **Game dev**, **EVM**, **TON**) — grouped by **purpose** so you can find "how do I build a desktop app / a game / a contract" fast, regardless of language. Every framework carries a **"Common headaches & how to handle them"** section covering its real-world pitfalls and the fix for each.
+Related sections are grouped in the sidebar under a collapsible parent (**Web UI (JS / TS)**, **Fullstack**, **WebAssembly**, **Desktop GUI**, **Game dev**, **3D graphics**, **EVM**, **TON**) — grouped by **purpose** so you can find "how do I build a desktop app / a game / a 3D scene / a contract" fast, regardless of language. Every framework carries a **"Common headaches & how to handle them"** section covering its real-world pitfalls and the fix for each.
 
 ## Run it
 
@@ -48,7 +49,7 @@ open index.html          # macOS
 - 🔗 **Copyable section links** — click a section's number to copy a deep link (`…#react--hooks`) that reopens straight to it.
 - ⌨ **Keyboard-shortcut overlay** — press `?` (or the `?` button) for the full list.
 - ▸ **Deep-dive accordions** — advanced details are collapsed by default; open only what you need.
-- 📋 Syntax-highlighted code (JSX/TSX, Python, Go, Dart, Rust, C++, QML, Lua, Solidity, GraphQL, Tact/FunC, …) with **copy** buttons.
+- 📋 Syntax-highlighted code (JSX/TSX, Python, Go, Dart, Rust, C++, QML, Lua, GLSL/WGSL, GML, GDScript, Odin, Solidity, Tact/FunC, …) with **copy** buttons.
 - 🖨 **Print-friendly** (Ctrl/Cmd+P expands everything for PDF export).
 
 ### Keyboard shortcuts

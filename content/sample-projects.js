@@ -27,7 +27,7 @@
       title: "Cross-framework comparison",
       level: "core",
       body: [
-        { type: "p", text: "A one-glance matrix of the **UI frameworks** in this deck. \"Rendering model\" is how the framework turns state into pixels; \"Reactivity\" is how it tracks what changed. The rest of the deck (fullstack meta-frameworks, GraphQL, the Python GUI/game libs, and the EVM/TON smart-contract stacks) sit outside these UI axes — those are summarised in the **signature-feature** table below." },
+        { type: "p", text: "A one-glance matrix of the **UI frameworks** in this deck. \"Rendering model\" is how the framework turns state into pixels; \"Reactivity\" is how it tracks what changed. The rest of the deck (fullstack meta-frameworks, the Python GUI/game libs, and the EVM/TON smart-contract stacks) sit outside these UI axes — those are summarised in the **signature-feature** table below." },
         { type: "table", headers: ["Framework", "Language", "Rendering model", "Reactivity / state", "Typical router"], rows: [
           ["Preact", "JavaScript", "Virtual DOM (~3kB)", "hooks + **signals**", "preact-iso"],
           ["React", "JS / TS", "Virtual DOM + Fiber", "hooks + external stores", "React Router v7"],
@@ -75,7 +75,6 @@
           ["Pygame", "2D game loop + surfaces/sprites; `convert()`/`convert_alpha()` and a fixed-step clock"],
           ["SDL (C++)", "Low-level cross-platform loop + GPU 2D render; SDL3 renamed much of SDL2 (SDL_RenderTexture, SDL_FRect)"],
           ["LÖVE (Lua)", "You write `love.load`/`update(dt)`/`draw` callbacks; LuaJIT speed; colors are 0–1; `.love` = zip + fuse to ship"],
-          ["GraphQL", "One typed schema (SDL) + resolvers; client asks for exactly the fields it needs; watch N+1 (DataLoader)"],
           ["Solidity", "EVM smart contracts, tested & shipped with **Foundry**; pair with a frontend via viem/wagmi"],
           ["EVM Clients (TS)", "`viem` (+ `wagmi` React hooks) for typed reads/writes, wallet connect, and ABI-typed contracts"],
           ["Tact", "TON's high-level contract language; actor model, typed messages, `receive()` handlers, Blueprint SDK"],

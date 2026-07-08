@@ -1,6 +1,6 @@
 /* ============================================================
    highlight.js — tiny dependency-free syntax highlighter
-   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, qml, lua, graphql, func, tact, bash, json, sql, env, http
+   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, qml, lua, glsl, wgsl, gml, gdscript, odin, graphql, func, tact, bash, json, sql, env, http
    ============================================================ */
 (function () {
   "use strict";
@@ -23,6 +23,11 @@
     tact: ["contract","trait","message","struct","fun","get","native","receive","init","let","const","return","if","else","while","repeat","until","do","try","catch","foreach","in","map","bounced","external","import","primitive","with","override","virtual","abstract","extends","mutates","extend","public","as","true","false","null","self","send","require","dump","emit","asm","Int","Bool","Address","Cell","Slice","Builder","String","StringBuilder","Context","SendParameters","StateInit"],
     qml: ["import","property","readonly","default","signal","alias","function","id","if","else","for","while","return","var","let","const","true","false","null","on","as","enum","component","required","pragma"],
     lua: ["and","break","do","else","elseif","end","false","for","function","goto","if","in","local","nil","not","or","repeat","return","then","true","until","while","self","require","pairs","ipairs","print","type","tostring","tonumber","pcall","error","setmetatable","getmetatable","math","string","table","io","os","love"],
+    glsl: ["void","bool","int","uint","float","double","vec2","vec3","vec4","ivec2","ivec3","ivec4","bvec2","bvec3","bvec4","mat2","mat3","mat4","sampler2D","sampler3D","samplerCube","sampler2DShadow","in","out","inout","uniform","attribute","varying","layout","location","binding","const","if","else","for","while","do","return","break","continue","discard","struct","precision","highp","mediump","lowp","flat","smooth","true","false","gl_Position","gl_FragCoord","gl_FragColor","gl_VertexID","gl_InstanceID","gl_PointSize"],
+    wgsl: ["fn","var","let","const","struct","return","if","else","for","loop","while","break","continue","switch","case","default","discard","true","false","f32","i32","u32","f16","bool","vec2","vec3","vec4","mat2x2","mat3x3","mat4x4","array","atomic","ptr","sampler","texture_2d","texture_cube","texture_depth_2d","override","alias","bitcast"],
+    gml: ["var","globalvar","if","else","while","for","do","until","repeat","switch","case","default","break","continue","return","exit","with","function","constructor","new","delete","self","other","all","noone","global","enum","static","true","false","undefined","and","or","not","xor","mod","div","then","begin","end"],
+    gdscript: ["func","var","const","if","elif","else","for","while","match","break","continue","return","pass","extends","class","class_name","signal","enum","static","export","onready","tool","await","yield","self","true","false","null","and","or","not","in","is","as","void","preload","load","super","breakpoint","assert"],
+    odin: ["package","import","foreign","proc","struct","enum","union","map","bit_set","bit_field","matrix","using","defer","return","if","else","for","switch","case","when","in","do","break","continue","fallthrough","or_else","or_return","or_break","or_continue","distinct","cast","transmute","auto_cast","dynamic","context","where","true","false","nil","not_in","typeid","any","rawptr","uintptr","int","uint","i8","i16","i32","i64","u8","u16","u32","u64","f16","f32","f64","bool","byte","rune","string","cstring","complex","quaternion"],
   };
 
   const LANG_SET = {
@@ -51,9 +56,15 @@
     tact: new Set([...KEYWORDS.common, ...KEYWORDS.tact]),
     qml: new Set([...KEYWORDS.common, ...KEYWORDS.qml]),
     lua: new Set(KEYWORDS.lua),
+    glsl: new Set([...KEYWORDS.common, ...KEYWORDS.glsl]),
+    wgsl: new Set([...KEYWORDS.common, ...KEYWORDS.wgsl]),
+    gml: new Set([...KEYWORDS.common, ...KEYWORDS.gml]),
+    gdscript: new Set([...KEYWORDS.common, ...KEYWORDS.gdscript]),
+    gd: new Set([...KEYWORDS.common, ...KEYWORDS.gdscript]),
+    odin: new Set([...KEYWORDS.common, ...KEYWORDS.odin]),
   };
 
-  const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore","graphql","gql"]);
+  const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore","graphql","gql","gdscript","gd"]);
   const esc = (s) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
   function highlight(code, lang) {
