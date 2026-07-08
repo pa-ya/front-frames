@@ -123,7 +123,7 @@
           "**`useSignal(v)`** / **`useComputed(fn)`** / **`useSignalEffect(fn)`** (from `@preact/signals`) — component-local signals that are created once and tied to the component lifecycle."
         ] },
         { type: "code", lang: "jsx", code: "import { useSignal, useComputed } from \"@preact/signals\";\n\nfunction LocalCounter() {\n  const count = useSignal(0);                  // local, created once\n  const label = useComputed(() => `n=${count.value}`);\n  return <button onClick={() => count.value++}>{label}</button>;\n}" },
-        { type: "code", lang: "jsx", code: "// Deep signals: signal(object) makes nested properties reactive too\nimport { signal, batch } from \"@preact/signals\";\n\nconst user = signal({ name: \"Ada\", age: 36 });\n// reading user.value.name subscribes to that property\nbatch(() => {\n  user.value = { ...user.value, age: 37 };   // replace to notify\n});" },
+        { type: "code", lang: "jsx", code: "// An object signal is ONE reactive value — @preact/signals is NOT deep\nimport { signal, batch } from \"@preact/signals\";\n\nconst user = signal({ name: \"Ada\", age: 36 });\nconst theme = signal(\"light\");\n// reading user.value subscribes to the signal; user.value.name is a plain read\n\n// reassign .value (spread a new object) to notify — in-place mutation won't\nbatch(() => {                     // group writes -> subscribers update once\n  user.value = { ...user.value, age: 37 };\n  theme.value = \"dark\";\n});" },
         { type: "callout", variant: "tip", text: "**Pass the signal, not `.value`, into JSX** (`{count}`) when you want the surgical one-node update. If you read `count.value` inside the component body/JSX, you subscribe the *whole component* to re-render instead — still correct, just less optimal." },
         { type: "callout", variant: "gotcha", text: "Signals hold values by reference. Mutating an object in place (`user.value.age = 37`) will **not** notify subscribers — reassign `.value` (or use a deep/nested signal) so the change is detected." },
         { type: "callout", variant: "note", text: "`@preact/signals-core` is the framework-agnostic engine (usable anywhere); `@preact/signals` adds the Preact JSX integration and the `use*` hooks. There's also `@preact/signals-react` for React." }
@@ -241,7 +241,7 @@
         { type: "code", lang: "html", code: "<script type=\"module\">\n  import { h, render } from \"https://esm.sh/preact\";\n  import { useState } from \"https://esm.sh/preact/hooks\";\n  import htm from \"https://esm.sh/htm\";\n\n  const html = htm.bind(h);   // bind the template tag to Preact's h()\n\n  function Counter() {\n    const [n, setN] = useState(0);\n    return html`<button onClick=${() => setN(n + 1)}>count: ${n}</button>`;\n  }\n\n  render(html`<${Counter} />`, document.body);\n</script>" },
         { type: "list", items: [
           "**`htm.bind(h)`** returns a `html` tag; interpolate with `${...}` and mount components as `<${Comp} />`.",
-          "**`preact/compat`** ships a preset: `import { html } from \"htm/preact\"` gives a ready-bound tag.",
+          "**`htm`** ships a Preact preset: `import { html } from \"htm/preact\"` gives a ready-bound `html` tag (no `htm.bind(h)` needed).",
           "**Trade-off:** no JSX tooling/type-checking on the template contents; slightly different syntax (`${...}` instead of `{...}`)."
         ] },
         { type: "callout", variant: "tip", text: "Use `htm` for zero-build widgets and demos; use JSX (via Vite) for real apps where you want type-checking, editor support, and dead-code elimination." }
@@ -337,7 +337,7 @@
           "**`class` and `className` both work** — but a library copied from React using `className` is fine; don't 'fix' it.",
           "**Signals vs hooks:** don't read `signal.value` inside `useEffect` deps expecting React-style tracking — effects use their dep array; `effect()`/`useSignalEffect` auto-track instead.",
           "**Compat is not free:** aliasing pulls in the compat layer (still tiny). If you author everything in Preact, you may not need it at all.",
-          "**Deep signals notify per property**, but only when you assign — spreading a new object (`{...obj, x}`) is the reliable way to trigger updates.",
+          "**Object signals are one reactive value** (`@preact/signals` is not deep) — reassign `.value` with a fresh object (`{...obj, x}`) to notify; for per-property reactivity reach for the `deepsignal` add-on.",
           "**SSR mismatch:** the tree you `hydrate` must match the prerendered HTML exactly, or Preact re-renders from scratch (losing the hydration win)."
         ] },
         { type: "callout", variant: "gotcha", text: "The single most common gotcha: copying a React `<input onChange={...}/>` and finding it 'laggy'. In Preact that's the **change** event. Swap to **`onInput`** and it tracks every keystroke like you expect." }

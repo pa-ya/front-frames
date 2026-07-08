@@ -241,7 +241,7 @@
       body: [
         { type: "p", text: "Storage is the dominant cost: a cold `SSTORE` (writing a fresh slot) is ~20,000 gas; reading storage (`SLOAD`) is ~2,100 cold. Memory and stack ops are cheap. Optimize by touching storage less and packing it tighter — but never trade away correctness or readability for micro-savings." },
         { type: "list", items: [
-          "**Pack storage:** group small types so multiple fit in one 32-byte slot (`uint96 price; address maker; bool filled;` → one slot). Declaration order matters. A `bool` and a `uint256` waste a slot each.",
+          "**Pack storage:** group small types so multiple fit in one 32-byte slot (`uint96 price; address maker;` → one slot, since 12 + 20 = 32 bytes; adding a `bool filled;` spills into a second slot — still 2 slots vs 3 unpacked). Declaration order matters. A `bool` next to a `uint256` wastes a slot each, since the `uint256` already fills its slot.",
           "**`constant` / `immutable`** instead of storage reads for fixed values — they're inlined into code, saving an `SLOAD` on every access.",
           "**Cache storage in memory:** read a storage var into a local once, work with the local, write back once, rather than re-reading `state.x` in a loop.",
           "**`calldata` over `memory`** for read-only external array/struct params — avoids the copy.",

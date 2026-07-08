@@ -16,14 +16,6 @@
 :root[data-theme="dark"] .icon-sun { display: block; }
 :root[data-theme="light"] .icon-moon { display: block; }
 
-.ghost-btn {
-  width: 100%; padding: 8px; border-radius: var(--r-md);
-  border: 1px solid var(--border); background: transparent; color: var(--text-3);
-  font-size: 12px; cursor: pointer; font-family: inherit;
-  transition: all var(--fast);
-}
-.ghost-btn:hover { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 40%, transparent); background: var(--danger-soft); }
-
 .btn {
   display: inline-flex; align-items: center; gap: var(--sp-2);
   padding: 8px 16px; border-radius: var(--r-md);
@@ -186,15 +178,6 @@ table.data tbody tr:hover, table.data tr:hover { background: var(--surface); }
 .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
 .badge.core { color: var(--accent); background: var(--accent-soft); }
 .badge.deep { color: var(--accent-2); background: color-mix(in srgb, var(--accent-2) 14%, transparent); }
-
-/* mark reviewed button on section */
-.section-done {
-  margin-left: auto; font-size: 12px; color: var(--text-3);
-  background: transparent; border: 1px solid var(--border); border-radius: 999px;
-  padding: 4px 12px; cursor: pointer; font-family: inherit; transition: all var(--fast); white-space: nowrap;
-}
-.section-done:hover { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
-.section-done.is-done { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); background: var(--good-soft); }
 
 /* ---------- Search results ---------- */
 .sr-item { display: block; padding: 9px 11px; border-radius: var(--r-sm); cursor: pointer; text-decoration: none; }

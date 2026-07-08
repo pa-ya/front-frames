@@ -17,6 +17,7 @@
     sql: ["SELECT","FROM","WHERE","INSERT","INTO","VALUES","UPDATE","SET","DELETE","CREATE","TABLE","ALTER","DROP","JOIN","LEFT","RIGHT","INNER","OUTER","ON","GROUP","BY","ORDER","LIMIT","OFFSET","AND","OR","NOT","NULL","PRIMARY","KEY","FOREIGN","REFERENCES","INDEX","DEFAULT","RETURNING","AS","DISTINCT","COUNT"],
     dart: ["abstract","as","async","await","class","const","covariant","default","deferred","dynamic","enum","export","extends","extension","external","factory","final","finally","for","get","if","else","implements","import","in","is","late","library","mixin","new","null","on","operator","part","required","rethrow","return","sealed","set","show","static","super","switch","case","sync","this","throw","try","typedef","var","void","while","with","yield","true","false","Future","Stream","Widget","build","override"],
     solidity: ["pragma","solidity","contract","interface","library","function","modifier","event","struct","enum","mapping","address","uint","uint256","uint8","int","int256","bool","string","bytes","bytes32","public","private","internal","external","pure","view","payable","virtual","override","returns","return","memory","storage","calldata","constant","immutable","constructor","emit","require","revert","assert","if","else","for","while","new","import","using","is","this","msg","block","tx","indexed","receive","fallback","unchecked","try","catch","abstract","type"],
+    cpp: ["auto","bool","char","class","const","constexpr","delete","do","double","else","enum","explicit","extern","false","float","for","friend","if","inline","int","long","mutable","namespace","new","noexcept","nullptr","operator","private","protected","public","register","return","short","signed","sizeof","static","static_cast","reinterpret_cast","dynamic_cast","const_cast","struct","switch","template","this","throw","true","try","typedef","typename","union","unsigned","using","virtual","void","volatile","while","case","break","continue","default","catch","override","final","decltype","uint8_t","uint16_t","uint32_t","uint64_t","int8_t","int16_t","int32_t","int64_t","size_t","std","string","vector","include","define","emscripten","val","EMSCRIPTEN_KEEPALIVE","EMSCRIPTEN_BINDINGS"],
   };
 
   const LANG_SET = {
@@ -27,6 +28,9 @@
     dart: new Set([...KEYWORDS.common, ...KEYWORDS.dart]),
     solidity: new Set([...KEYWORDS.common, ...KEYWORDS.solidity]),
     sol: new Set([...KEYWORDS.common, ...KEYWORDS.solidity]),
+    cpp: new Set([...KEYWORDS.common, ...KEYWORDS.cpp]),
+    "c++": new Set([...KEYWORDS.common, ...KEYWORDS.cpp]),
+    c:   new Set([...KEYWORDS.common, ...KEYWORDS.cpp]),
     py:  new Set([...KEYWORDS.py, "self","cls","print","str","int","float","dict","list","bool","tuple","set","range"]),
     python: new Set([...KEYWORDS.py, "self","cls"]),
     go:  new Set(KEYWORDS.go),

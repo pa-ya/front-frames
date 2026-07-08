@@ -29,7 +29,7 @@
           ["Event handler", "`onClick={fn}`", "`onclick={Callback}`"],
           ["Re-render unit", "the component re-runs", "the component re-runs (+ vdom diff)"]
         ] },
-        { type: "callout", variant: "note", text: "This guide targets **Yew 0.21** (current stable). 0.21 renamed `use_effect_with_deps` to **`use_effect_with`**, moved to function components as the default, and split workers into the `yew-agent` 0.3 / `gloo-worker` crates. Everything imports from one prelude: `use yew::prelude::*;`." },
+        { type: "callout", variant: "note", text: "This guide's patterns target **Yew 0.21+** and still apply on the current stable (**0.23**, released 2026 — Yew moves slowly). 0.21 renamed `use_effect_with_deps` to **`use_effect_with`** and split workers into the `yew-agent` 0.3 / `gloo-worker` crates; **0.22** (Dec 2025) then renamed the `#[function_component]` attribute to **`#[component]`** (the old name still works, deprecated) and added native `for` loops inside `html!`. Everything imports from one prelude: `use yew::prelude::*;`." },
         { type: "callout", variant: "tip", text: "Yew is **CSR-first** (a single-page app). It also supports SSR + hydration (see the SSR section), but there is no built-in server/router/data layer like Next.js — you assemble those from crates (`yew-router`, `gloo-net`, your own Axum/Actix backend)." }
       ]
     },

@@ -15,7 +15,7 @@
       level: "core",
       body: [
         { type: "p", text: "Angular is Google's **batteries-included** framework for building web apps: components + a template language, dependency injection, a router, an HTTP client, forms, testing, and a first-class CLI — all maintained together in one versioned release train. You write **TypeScript**; the compiler (`ngc`, ahead-of-time) turns your components and templates into optimized JS. Unlike a library you assemble yourself, Angular gives you an opinionated, cohesive stack." },
-        { type: "callout", variant: "warn", text: "**This guide covers *modern* Angular (v2+, currently v19/v20)** — the TypeScript, component-based framework often just called \"Angular\". It is **NOT AngularJS (1.x)**, a completely different, **end-of-life** framework (`$scope`, `ng-controller`, `angular.module`, `.js` script tag). If a tutorial uses `$scope` or `angular.module(...)`, it's the legacy one — ignore it. Modern Angular releases a major version roughly every 6 months (v20 = mid-2025)." },
+        { type: "callout", variant: "warn", text: "**This guide covers *modern* Angular (v2+, currently v20/v21)** — the TypeScript, component-based framework often just called \"Angular\". It is **NOT AngularJS (1.x)**, a completely different, **end-of-life** framework (`$scope`, `ng-controller`, `angular.module`, `.js` script tag). If a tutorial uses `$scope` or `angular.module(...)`, it's the legacy one — ignore it. Modern Angular releases a major version roughly every 6 months (v20 = mid-2025, v21 = late 2025)." },
         { type: "list", items: [
           "**Reach for it when:** you want a complete, opinionated stack for a large/long-lived app, strong TypeScript integration, and a team that benefits from consistent conventions and tooling.",
           "**Mental model (modern):** a tree of **standalone components**, each a class + template. State lives in **signals** (reactive values); the template re-renders the parts that read a changed signal. Cross-cutting logic lives in **injectable services** pulled in via **dependency injection**.",
@@ -119,7 +119,7 @@
         ] },
         { type: "code", lang: "ts", code: "import { linkedSignal } from \"@angular/core\";\n\n// linkedSignal: user-editable, but re-derives when the source list changes\nconst options = signal([\"a\", \"b\", \"c\"]);\nconst selected = linkedSignal(() => options()[0]);   // resets to first when options change\nselected.set(\"b\");                                    // still user-writable" },
         { type: "code", lang: "ts", code: "import { toSignal } from \"@angular/core/rxjs-interop\";\n\n// bridge RxJS -> signals: read HTTP/stream data as a signal in the template\nprivate http = inject(HttpClient);\nusers = toSignal(this.http.get<User[]>(\"/api/users\"), { initialValue: [] });\n// template: @for (u of users(); track u.id) { ... }" },
-        { type: "callout", variant: "gotcha", text: "**Read a signal by calling it** — `count`, not `count`... wait: use `count()` in templates and code. Writing `{{ count }}` (no parens) renders the signal *function*, not its value — a very common first-day mistake. Same in `computed`/`effect`: you must *call* the signal to create a dependency." },
+        { type: "callout", variant: "gotcha", text: "**Read a signal by calling it** — `count()`, not `count`. Writing `{{ count }}` (no parens) renders the signal *function*, not its value — a very common first-day mistake. Same in `computed`/`effect`: you must *call* the signal to create a dependency." },
         { type: "callout", variant: "note", text: "`effect()` runs in an injection context (constructor or field initializer). It auto-cleans up when the component is destroyed. In v20 you can freely `.set()` other signals inside an effect; the old `allowSignalWrites` flag is gone. Prefer `computed()` over `effect()` for deriving values — effects are for I/O side effects, not state derivation." }
       ]
     },
@@ -290,7 +290,7 @@
         { type: "code", lang: "ts", code: "import { ChangeDetectionStrategy, Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-row\",\n  changeDetection: ChangeDetectionStrategy.OnPush,   // check only when inputs/signals change\n  template: `{{ item().name }}`,\n})\nexport class Row { item = input.required<Item>(); }" },
         { type: "p", text: "With **`OnPush`**, Angular skips re-checking a component unless: an `@Input` reference changed, an event fired inside it, an `async` pipe emitted, or a **signal it reads changed**. This prunes huge subtrees. Signals + `OnPush` are the intended pairing." },
         { type: "code", lang: "ts", code: "// zoneless: no Zone.js — signals (and async pipe / event bindings) drive updates\n// app.config.ts\nimport { provideZonelessChangeDetection } from \"@angular/core\";\n\nexport const appConfig = {\n  providers: [ provideZonelessChangeDetection() ],   // stable since v20.2\n};\n// (older name: provideExperimentalZonelessChangeDetection)" },
-        { type: "callout", variant: "tip", text: "**Zoneless is the direction of travel.** It removes the ~100 KB Zone.js dependency and updates the UI only from real reactive changes. It requires your state to flow through signals / async pipe / explicit `markForCheck`. New apps in v20+ are increasingly zoneless by default." },
+        { type: "callout", variant: "tip", text: "**Zoneless is the direction of travel.** It removes the ~100 KB Zone.js dependency and updates the UI only from real reactive changes. It requires your state to flow through signals / async pipe / explicit `markForCheck`. It's **stable since v20.2**, and new apps in **v21+ are zoneless by default**." },
         { type: "callout", variant: "gotcha", text: "Under `OnPush`, **mutating an object/array in place does NOT trigger an update** — Angular compares references. Replace the reference (`this.items = [...this.items, x]`) or, better, use a **signal** and `.update()`/`.set()`. This is the #1 \"my view won't refresh\" cause." }
       ]
     },
@@ -299,16 +299,16 @@
       title: "Testing",
       level: "deep",
       body: [
-        { type: "p", text: "Angular ships a testing utility, **`TestBed`**, that configures a mini module and creates component fixtures. The classic runner is **Jasmine + Karma** (in-browser). Angular is now shifting toward **Vitest** — v20 added an experimental `@angular/build:unit-test` builder that runs specs on Vitest (faster, no browser required)." },
+        { type: "p", text: "Angular ships a testing utility, **`TestBed`**, that configures a mini module and creates component fixtures. The classic runner is **Jasmine + Karma** (in-browser). Angular has now moved to **Vitest** — promoted to stable and made the default test runner in **v21** (the `@angular/build:unit-test` builder), running specs faster with no browser required." },
         { type: "code", lang: "ts", code: "import { TestBed } from \"@angular/core/testing\";\nimport { Counter } from \"./counter\";\n\ndescribe(\"Counter\", () => {\n  it(\"increments\", () => {\n    const fixture = TestBed.createComponent(Counter);\n    fixture.detectChanges();                       // initial render\n    const btn = fixture.nativeElement.querySelector(\"button\");\n\n    btn.click();\n    fixture.detectChanges();\n    expect(btn.textContent).toContain(\"Count: 1\");\n  });\n});" },
         { type: "code", lang: "ts", code: "// mock a dependency via DI — swap the real service for a fake\nTestBed.configureTestingModule({\n  imports: [Profile],\n  providers: [{ provide: UserService, useValue: { current: signal(fakeUser) } }],\n});\n\n// HTTP: use provideHttpClientTesting() + HttpTestingController to assert requests\n// e2e: Playwright or Cypress (ng e2e) drive the real app in a browser." },
         { type: "list", items: [
-          "**Unit / component:** `TestBed` + Jasmine (Karma) today; **Vitest** experimental via `ng test` in v20 (`@angular/build:unit-test`).",
+          "**Unit / component:** `TestBed` + Jasmine (Karma) in older apps; **Vitest** is the default runner via `ng test` since v21 (`@angular/build:unit-test`).",
           "**DI makes mocking easy:** override any provider with `useValue`/`useClass` in the test module.",
           "**HTTP:** `provideHttpClientTesting()` + `HttpTestingController` to flush and assert requests without a network.",
           "**End-to-end:** Playwright or Cypress; Angular deprecated its old Protractor e2e long ago."
         ] },
-        { type: "callout", variant: "note", text: "Karma is **deprecated**. For new projects, opt into the Vitest builder (or use Jest via a community setup) — it's faster and runs in Node. The `TestBed`/`fixture` API is the same regardless of runner." }
+        { type: "callout", variant: "note", text: "Karma is **deprecated**. New projects use the **Vitest** builder by default (or Jest via a community setup) — faster and runs in Node. The `TestBed`/`fixture` API is the same regardless of runner." }
       ]
     },
     {

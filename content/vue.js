@@ -28,7 +28,7 @@
           ["Global state", "Redux/Zustand", "**Pinia** store"],
           ["Data fetching", "React Query", "`Suspense` + composables / TanStack Query"]
         ] },
-        { type: "callout", variant: "note", text: "This guide targets **Vue 3.5** (current stable). Highlights since 3.0: `<script setup>` is the recommended default, **`defineModel()`** (stable in 3.4) for two-way binding, **reactive props destructure** (stable in 3.5), **`useTemplateRef()`** and `useId()` (3.5), and big memory/reactivity performance work. Vue 2 reached end-of-life at the end of 2023 — build new apps on Vue 3." },
+        { type: "callout", variant: "note", text: "This guide targets **Vue 3.5+**. As of 2026 the current stable is **Vue 3.6**, which stabilizes **Vapor mode** — an opt-in compilation strategy that skips the virtual DOM and compiles components to direct DOM operations for large speed/memory wins (existing vDOM components keep working unchanged). Highlights since 3.0: `<script setup>` is the recommended default, **`defineModel()`** (stable in 3.4) for two-way binding, **reactive props destructure** (stable in 3.5), **`useTemplateRef()`** and `useId()` (3.5), and big memory/reactivity performance work. Vue 2 reached end-of-life at the end of 2023 — build new apps on Vue 3." },
         { type: "callout", variant: "tip", text: "Coming from an older tutorial? If you see `new Vue({...})`, `Vue.component`, filters, or `this.$set` — that's **Vue 2**. Vue 3 uses `createApp()`, Proxy-based reactivity (no `Vue.set` needed), and `<script setup>`. If you see `export default { setup() { return {...} } }`, that's the verbose Composition form; `<script setup>` is the sugar you want." }
       ]
     },
@@ -146,7 +146,7 @@
       level: "core",
       body: [
         { type: "p", text: "Lifecycle hooks let you run code at key moments. In `<script setup>` they're functions you call, passing a callback — registered against the current component instance. The most common is **`onMounted`** (DOM is ready)." },
-        { type: "code", lang: "ts", code: "import { onMounted, onUnmounted, onUpdated, onBeforeMount } from \"vue\";\n\nonMounted(() => {          // component + its DOM are in the page\n  const off = window.addEventListener(\"resize\", handler);\n});\nonUnmounted(() => {        // cleanup: remove listeners, timers, subscriptions\n  window.removeEventListener(\"resize\", handler);\n});" },
+        { type: "code", lang: "ts", code: "import { onMounted, onUnmounted, onUpdated, onBeforeMount } from \"vue\";\n\nonMounted(() => {          // component + its DOM are in the page\n  window.addEventListener(\"resize\", handler);\n});\nonUnmounted(() => {        // cleanup: remove listeners, timers, subscriptions\n  window.removeEventListener(\"resize\", handler);\n});" },
         { type: "table", headers: ["Hook", "Fires when"], rows: [
           ["`onBeforeMount` / `onMounted`", "before / after first DOM render"],
           ["`onBeforeUpdate` / `onUpdated`", "before / after a reactive re-render"],

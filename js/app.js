@@ -44,9 +44,6 @@
     // wire chrome
     document.getElementById("menuToggle").addEventListener("click", window.Nav.toggleMobileNav);
     document.getElementById("scrim").addEventListener("click", window.Nav.closeMobileNav);
-    document.getElementById("resetProgress").addEventListener("click", () => {
-      if (confirm("Reset all reviewed progress?")) window.Progress.reset();
-    });
 
     // pick initial framework: hash > last visited > first.
     // hash may be a framework id ("#fastapi") or a deep section anchor ("#fastapi--routing").
@@ -61,7 +58,6 @@
     if (!start || !fws.find((f) => f.id === start)) start = fws[0].id;
 
     window.Nav.select(start, false);
-    window.Progress.refreshUI();
 
     // scroll to a deep-linked section once it has rendered
     if (sectionAnchor) {

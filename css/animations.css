@@ -53,7 +53,7 @@
 
 /* print */
 @media print {
-  .topbar, .sidebar, .toc, #scrim, .modal, .toast, .section-done, .copy-btn, .hero-actions,
+  .topbar, .sidebar, .toc, #scrim, .modal, .toast, .copy-btn, .hero-actions,
   .back-to-top, .reading-progress, .fw-nav { display: none !important; }
   .app { grid-template-columns: 1fr; }
   .main { padding: 0; }

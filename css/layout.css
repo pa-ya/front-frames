@@ -85,19 +85,6 @@
   gap: var(--sp-3);
 }
 
-.progress-ring-wrap { display: flex; justify-content: center; padding: var(--sp-2) 0 var(--sp-3); }
-.progress-ring { position: relative; width: 72px; height: 72px; }
-.progress-ring svg { transform: rotate(-90deg); }
-.ring-bg { fill: none; stroke: var(--border); stroke-width: 7; }
-.ring-fg {
-  fill: none; stroke: var(--accent); stroke: url(#ringGrad); stroke-width: 7; stroke-linecap: round;
-  stroke-dasharray: 213.6; stroke-dashoffset: 213.6;
-  transition: stroke-dashoffset var(--slow) var(--ease-out);
-}
-.ring-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.ring-label span { font-weight: 700; font-size: 16px; }
-.ring-label small { font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; }
-
 .nav { display: flex; flex-direction: column; gap: 2px; }
 .nav-item {
   display: flex; align-items: center; gap: var(--sp-3);
@@ -112,11 +99,6 @@
 .nav-item .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent); }
 .nav-item .nav-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nav-item .nav-lang { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .04em; }
-.nav-item .check {
-  width: 16px; height: 16px; opacity: 0; color: var(--good);
-  transition: opacity var(--fast), transform var(--fast); transform: scale(.6);
-}
-.nav-item.is-done .check { opacity: 1; transform: scale(1); }
 .nav-group-label { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-3); padding: var(--sp-3) 11px var(--sp-1); }
 
 /* ---------- Collapsible nav groups (Go / Rust / C++) ---------- */

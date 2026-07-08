@@ -35,7 +35,7 @@ open index.html          # macOS
 
 - 🌗 **Dark / light theme** — toggle with `t`, remembered across visits (respects your OS setting first time).
 - 🔎 **Global search** (`/`) — jump to any concept, package, or cheat-card entry across all frameworks.
-- ✅ **Progress tracking** — mark sections *Reviewed*; the sidebar ring shows overall coverage (saved locally), with an at-a-glance **deck-stats** line (frameworks · sections · total read time).
+- 📈 **Deck-stats** — an at-a-glance line under the sidebar (frameworks · sections · total read time).
 - 🃏 **Flashcards + quiz** (`f`) — active-recall practice per framework.
 - 🧭 **Sticky nav + on-this-page TOC** with scroll-spy; the active item is kept in view and its group auto-expands.
 - 📊 **Reading-progress bar** under the top bar, plus a **back-to-top** button (or press `g` `g`).
@@ -63,7 +63,7 @@ open index.html          # macOS
 ```
 index.html            # shell (loads everything)
 css/                  # theme (violet/magenta tokens), layout, components, animations
-js/                   # highlight, render, nav, search, progress, flashcards, theme, ux, app
+js/                   # highlight, render, nav, search, flashcards, theme, ux, app
 content/              # one file per framework (window.FRAMEWORKS.push({...}))
   _schema.md          # authoring guide for the content object
 TASK.md               # build log / spec
@@ -82,7 +82,7 @@ node -e "global.window={FRAMEWORKS:[]};require('./content/react.js');console.log
 
 To add a framework: create `content/<id>.js`, then add a matching
 `<script src="content/<id>.js"></script>` line in `index.html`. The sidebar, search,
-progress, and flashcards pick it up automatically. Consecutive frameworks that share a
+and flashcards pick it up automatically. Consecutive frameworks that share a
 `group` value fold into one collapsible sidebar parent.
 
 ## Relationship to the backend deck

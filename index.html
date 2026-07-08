@@ -46,25 +46,9 @@
   <div class="app">
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar">
-      <div class="progress-ring-wrap">
-        <div class="progress-ring">
-          <svg viewBox="0 0 80 80" width="72" height="72">
-            <defs>
-              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="var(--accent)" />
-                <stop offset="100%" stop-color="var(--accent-2)" />
-              </linearGradient>
-            </defs>
-            <circle class="ring-bg" cx="40" cy="40" r="34" />
-            <circle id="ringProgress" class="ring-fg" cx="40" cy="40" r="34" />
-          </svg>
-          <div class="ring-label"><span id="ringPercent">0%</span><small>reviewed</small></div>
-        </div>
-      </div>
       <nav id="nav" class="nav" aria-label="Frameworks"></nav>
       <div class="sidebar-foot">
         <div id="deckStats" class="deck-stats"></div>
-        <button id="resetProgress" class="ghost-btn" title="Reset progress">Reset progress</button>
       </div>
     </aside>
     <div id="scrim" class="scrim"></div>
@@ -148,7 +132,6 @@
 
   <!-- Features + boot -->
   <script src="js/theme.js"></script>
-  <script src="js/progress.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/search.js"></script>
   <script src="js/flashcards.js"></script>

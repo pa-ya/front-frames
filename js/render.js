@@ -123,9 +123,6 @@
     const head = el("div", "section-head");
     head.appendChild(el("span", "section-num", String(index).padStart(2, "0")));
     head.appendChild(el("h2", null, inline(sec.title)));
-    const doneBtn = el("button", "section-done", "✓ Reviewed");
-    doneBtn.dataset.done = `${fw.id}::${sec.id}`;
-    head.appendChild(doneBtn);
     s.appendChild(head);
     bodyBlocks(s, sec.body);
     return s;
