@@ -1,6 +1,6 @@
 /* ============================================================
    highlight.js — tiny dependency-free syntax highlighter
-   Supports: js, ts, py, go, rust, php, bash, json, sql, env, http
+   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, graphql, func, tact, bash, json, sql, env, http
    ============================================================ */
 (function () {
   "use strict";
@@ -18,6 +18,9 @@
     dart: ["abstract","as","async","await","class","const","covariant","default","deferred","dynamic","enum","export","extends","extension","external","factory","final","finally","for","get","if","else","implements","import","in","is","late","library","mixin","new","null","on","operator","part","required","rethrow","return","sealed","set","show","static","super","switch","case","sync","this","throw","try","typedef","var","void","while","with","yield","true","false","Future","Stream","Widget","build","override"],
     solidity: ["pragma","solidity","contract","interface","library","function","modifier","event","struct","enum","mapping","address","uint","uint256","uint8","int","int256","bool","string","bytes","bytes32","public","private","internal","external","pure","view","payable","virtual","override","returns","return","memory","storage","calldata","constant","immutable","constructor","emit","require","revert","assert","if","else","for","while","new","import","using","is","this","msg","block","tx","indexed","receive","fallback","unchecked","try","catch","abstract","type"],
     cpp: ["auto","bool","char","class","const","constexpr","delete","do","double","else","enum","explicit","extern","false","float","for","friend","if","inline","int","long","mutable","namespace","new","noexcept","nullptr","operator","private","protected","public","register","return","short","signed","sizeof","static","static_cast","reinterpret_cast","dynamic_cast","const_cast","struct","switch","template","this","throw","true","try","typedef","typename","union","unsigned","using","virtual","void","volatile","while","case","break","continue","default","catch","override","final","decltype","uint8_t","uint16_t","uint32_t","uint64_t","int8_t","int16_t","int32_t","int64_t","size_t","std","string","vector","include","define","emscripten","val","EMSCRIPTEN_KEEPALIVE","EMSCRIPTEN_BINDINGS"],
+    graphql: ["type","query","mutation","subscription","input","enum","interface","union","scalar","schema","fragment","on","implements","extend","directive","true","false","null","ID","Int","Float","String","Boolean"],
+    func: ["int","cell","slice","builder","cont","tuple","var","impure","inline","inline_ref","method_id","global","const","return","if","ifnot","else","elseif","elseifnot","while","do","until","repeat","forall","asm","type","true","false","null","throw","throw_if","throw_unless","recv_internal","recv_external","begin_cell","end_cell","store_uint","load_uint","get_data","set_data","nil"],
+    tact: ["contract","trait","message","struct","fun","get","native","receive","init","let","const","return","if","else","while","repeat","until","do","try","catch","foreach","in","map","bounced","external","import","primitive","with","override","virtual","abstract","extends","mutates","extend","public","as","true","false","null","self","send","require","dump","emit","asm","Int","Bool","Address","Cell","Slice","Builder","String","StringBuilder","Context","SendParameters","StateInit"],
   };
 
   const LANG_SET = {
@@ -40,9 +43,13 @@
     bash: new Set(KEYWORDS.bash),
     sh:  new Set(KEYWORDS.bash),
     sql: new Set(KEYWORDS.sql.map(k=>k.toLowerCase()).concat(KEYWORDS.sql)),
+    graphql: new Set(KEYWORDS.graphql),
+    gql: new Set(KEYWORDS.graphql),
+    func: new Set(KEYWORDS.func),
+    tact: new Set([...KEYWORDS.common, ...KEYWORDS.tact]),
   };
 
-  const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore"]);
+  const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore","graphql","gql"]);
   const esc = (s) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
   function highlight(code, lang) {

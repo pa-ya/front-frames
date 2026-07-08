@@ -9,10 +9,14 @@ violet/magenta identity and loaded with a different set of (mostly frontend) fra
 
 **Sections** (in sidebar order):
 
-- **JS / TS** — Preact · React · Angular · Vue
+- **JS / TS** — Preact · React · Angular · Vue · TanStack
+- **Fullstack** — AdonisJS · Wasp
 - **WebAssembly** — Yew (Rust) · C++ WebAssembly (Emscripten)
 - **Flutter** (Dart) — mobile / web / desktop from one codebase
-- **Solidity** (+ Foundry) — EVM smart contracts
+- **Python** — Tkinter · PySide6 (Qt) · Pygame
+- **GraphQL** — schema-first API query language
+- **EVM** — Solidity (+ Foundry) · EVM clients (TypeScript / viem)
+- **TON** — Tact · FunC (Telegram Open Network smart contracts)
 - **Practice & Projects** — cross-framework comparison + project ideas
 
 Related sections are grouped in the sidebar under a collapsible parent (**JS / TS**, **WebAssembly**). Every framework carries a **"Common headaches & how to handle them"** section covering its real-world pitfalls and the fix for each.
@@ -43,7 +47,7 @@ open index.html          # macOS
 - 🔗 **Copyable section links** — click a section's number to copy a deep link (`…#react--hooks`) that reopens straight to it.
 - ⌨ **Keyboard-shortcut overlay** — press `?` (or the `?` button) for the full list.
 - ▸ **Deep-dive accordions** — advanced details are collapsed by default; open only what you need.
-- 📋 Syntax-highlighted code (JSX/TSX, Dart, Solidity, Rust, C++, …) with **copy** buttons.
+- 📋 Syntax-highlighted code (JSX/TSX, Python, Dart, Solidity, Rust, C++, GraphQL, Tact/FunC, …) with **copy** buttons.
 - 🖨 **Print-friendly** (Ctrl/Cmd+P expands everything for PDF export).
 
 ### Keyboard shortcuts

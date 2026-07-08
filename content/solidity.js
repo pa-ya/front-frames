@@ -2,6 +2,8 @@
   id: "solidity",
   name: "Solidity",
   language: "Solidity",
+  group: "EVM",
+  navLabel: "Solidity",
   color: "#627eea",
   readMinutes: 32,
   tagline: "The language of **EVM smart contracts** — typed, contract-oriented Solidity, tested and shipped with the **Foundry** toolchain (`forge`/`cast`/`anvil`).",

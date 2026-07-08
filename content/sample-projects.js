@@ -15,7 +15,7 @@
         { type: "list", items: [
           "**Skim the core sections** of a framework (ordered easy → hard), then open the **Deep dive** accordions only for the parts you've forgotten.",
           "Hit **Study flashcards** (`f`) after reading — the quiz mode tests active recall, which beats re-reading.",
-          "Mark each section **Reviewed** to track coverage; the ring in the sidebar shows overall progress.",
+          "Open the **Deep dive** accordions (marked *deep*) only for the advanced parts you've forgotten — the core sections are the fast path.",
           "Use **search** (`/`) to jump straight to a concept across all frameworks (e.g. \"signals\", \"props\", \"hydration\", \"reentrancy\").",
           "Keyboard: `j`/`k` next/prev framework, `t` theme, `f` flashcards, `/` search, `Esc` close."
         ] },
