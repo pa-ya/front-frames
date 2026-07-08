@@ -48,7 +48,7 @@ open index.html          # macOS
 - 🔗 **Copyable section links** — click a section's number to copy a deep link (`…#react--hooks`) that reopens straight to it.
 - ⌨ **Keyboard-shortcut overlay** — press `?` (or the `?` button) for the full list.
 - ▸ **Deep-dive accordions** — advanced details are collapsed by default; open only what you need.
-- 📋 Syntax-highlighted code (JSX/TSX, Python, Dart, Solidity, Rust, C++, GraphQL, Tact/FunC, …) with **copy** buttons.
+- 📋 Syntax-highlighted code (JSX/TSX, Python, Go, Dart, Rust, C++, QML, Solidity, GraphQL, Tact/FunC, …) with **copy** buttons.
 - 🖨 **Print-friendly** (Ctrl/Cmd+P expands everything for PDF export).
 
 ### Keyboard shortcuts

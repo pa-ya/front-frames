@@ -21,7 +21,7 @@
           ["An event queue + input state", "A physics engine (bring Box2D / roll AABB)"],
           ["An audio device + SDL_mixer", "A GUI toolkit (use Dear ImGui for debug UI)"],
           ["Image / font / timer helpers", "A level editor (author in Tiled, load yourself)"],
-          ["Cross-platform C ABI, MIT-licensed (zlib before)", "A managed runtime — you manage lifetimes"]
+          ["Cross-platform C ABI, permissive **zlib** license", "A managed runtime — you manage lifetimes"]
         ] },
         { type: "callout", variant: "note", text: "SDL3 is **zlib-licensed** (permissive, same as before): link it statically or dynamically, ship commercial games, no royalties. The extension libs (SDL_image/ttf/mixer) are also zlib." },
         { type: "callout", variant: "tip", text: "**Want the friendlier object-oriented alternative? Reach for SFML.** SFML wraps the same territory (window/graphics/audio/input) in clean C++ classes (`sf::RenderWindow`, `sf::Sprite`, `sf::Texture`, `sf::Music`) with RAII lifetimes and no manual `SDL_Destroy*`. It is lovely for learning and jams. SDL wins on **reach** (consoles, mobile, web, Steam Deck), battle-tested input/audio, a massive ecosystem, and being the industry-standard C layer. Learn SDL to ship broadly; pick SFML if you want ergonomics over reach." }
