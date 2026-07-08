@@ -14,7 +14,7 @@ violet/magenta identity and loaded with a different set of (mostly frontend) fra
 - **WebAssembly** — Yew (Rust) · C++ WebAssembly (Emscripten)
 - **Flutter** (Dart) — mobile / web / desktop from one codebase
 - **Desktop GUI** — Qt (C++) · PySide6 (Python) · Tkinter (Python) · egui (Rust) · Fyne (Go)
-- **Game dev** — Pygame (Python) · SDL (C++)
+- **Game dev** — Pygame (Python) · SDL (C++) · LÖVE (Lua)
 - **GraphQL** — schema-first API query language
 - **EVM** — Solidity (+ Foundry) · EVM clients (TypeScript / viem)
 - **TON** — Tact · FunC (Telegram Open Network smart contracts)
@@ -48,7 +48,7 @@ open index.html          # macOS
 - 🔗 **Copyable section links** — click a section's number to copy a deep link (`…#react--hooks`) that reopens straight to it.
 - ⌨ **Keyboard-shortcut overlay** — press `?` (or the `?` button) for the full list.
 - ▸ **Deep-dive accordions** — advanced details are collapsed by default; open only what you need.
-- 📋 Syntax-highlighted code (JSX/TSX, Python, Go, Dart, Rust, C++, QML, Solidity, GraphQL, Tact/FunC, …) with **copy** buttons.
+- 📋 Syntax-highlighted code (JSX/TSX, Python, Go, Dart, Rust, C++, QML, Lua, Solidity, GraphQL, Tact/FunC, …) with **copy** buttons.
 - 🖨 **Print-friendly** (Ctrl/Cmd+P expands everything for PDF export).
 
 ### Keyboard shortcuts

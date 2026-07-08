@@ -51,9 +51,10 @@
         { type: "heading", text: "Game-dev libraries — at a glance" },
         { type: "table", headers: ["Library", "Language", "Level", "You write", "Best for"], rows: [
           ["Pygame (pygame-ce)", "Python", "high-level over SDL", "the game loop + blits", "learning, prototypes, 2D games/jams"],
-          ["SDL (SDL3)", "C++", "low-level multimedia", "loop + GPU render + input", "shipped 2D games, engines, ports, emulators"]
+          ["SDL (SDL3)", "C++", "low-level multimedia", "loop + GPU render + input", "shipped 2D games, engines, ports, emulators"],
+          ["LÖVE (Love2D)", "Lua", "high-level, callback-driven", "`load`/`update(dt)`/`draw`", "2D games shipped fast (LuaJIT speed); e.g. Balatro"]
         ] },
-        { type: "callout", variant: "note", text: "**Pygame is a thin wrapper over SDL** — same mental model (own the loop, surfaces/textures, poll events, fixed timestep), so learning one teaches the other. Move to **SDL/C++** when you need raw performance, GPU rendering, gamepad/console reach, or to embed in a larger C++ engine. **SFML** is the friendlier object-oriented C++ alternative to SDL if you prefer classes over C APIs." },
+        { type: "callout", variant: "note", text: "All three share **one mental model**: own (or fill in) the loop, update by delta-time, draw each frame, poll input. **Pygame** and **LÖVE** are both high-level wrappers over **SDL** — Pygame you write the `while` loop yourself; LÖVE calls your `love.update`/`love.draw` callbacks and runs on **LuaJIT** for near-C speed. Drop to **SDL/C++** for raw performance, GPU rendering, console/gamepad reach, or to embed in a larger C++ engine. **SFML** is the friendlier object-oriented C++ alternative to SDL if you prefer classes over C APIs." },
         { type: "heading", text: "Signature feature to remember — every tech in the deck" },
         { type: "table", headers: ["Tech", "Signature feature to remember"], rows: [
           ["Preact", "Tiny React-compatible core + `@preact/signals`; `preact/compat` aliases React libraries"],
@@ -73,6 +74,7 @@
           ["Fyne (Go)", "Pure-Go cross-platform GUI; data binding + `fyne.Do` for thread-safe UI updates; ships mobile"],
           ["Pygame", "2D game loop + surfaces/sprites; `convert()`/`convert_alpha()` and a fixed-step clock"],
           ["SDL (C++)", "Low-level cross-platform loop + GPU 2D render; SDL3 renamed much of SDL2 (SDL_RenderTexture, SDL_FRect)"],
+          ["LÖVE (Lua)", "You write `love.load`/`update(dt)`/`draw` callbacks; LuaJIT speed; colors are 0–1; `.love` = zip + fuse to ship"],
           ["GraphQL", "One typed schema (SDL) + resolvers; client asks for exactly the fields it needs; watch N+1 (DataLoader)"],
           ["Solidity", "EVM smart contracts, tested & shipped with **Foundry**; pair with a frontend via viem/wagmi"],
           ["EVM Clients (TS)", "`viem` (+ `wagmi` React hooks) for typed reads/writes, wallet connect, and ABI-typed contracts"],
@@ -96,7 +98,7 @@
           "**Stopwatch / countdown timer** — `setInterval` inside an effect with correct **cleanup**. The classic effect-lifecycle drill.",
           "**Tic-tac-toe** — derive the winner from board state (no duplicated state), immutable updates, time-travel history.",
           "**Desktop calculator / note-taker** *(Desktop GUI)* — a native window with inputs, buttons and a menu; state in memory, saved to a file. Build it in **Qt**, **Tkinter**, **egui** or **Fyne** to feel each toolkit's layout system and event model.",
-          "**Pong or Snake** *(Game dev)* — the \"hello game loop\": a fixed-timestep loop, keyboard input, collision and a score. Build in **Pygame**, then port to **SDL/C++** to feel the same loop one level lower."
+          "**Pong or Snake** *(Game dev)* — the \"hello game loop\": a fixed-timestep loop, keyboard input, collision and a score. Build in **Pygame** or **LÖVE** (fastest to prototype), then port to **SDL/C++** to feel the same loop one level lower."
         ] },
         { type: "callout", variant: "tip", text: "Add the same two things to every minimal *web* project: **an async data source** (loading/error states) and **one piece of URL state** (a route param or query the UI reads). For **desktop/game** builds the two muscle-memory drills are instead **off-thread work** (never block the UI/game loop) and a **clean update→render split**." }
       ]
@@ -115,7 +117,7 @@
           "**Multi-step form wizard** — validated steps, a progress indicator, and review-before-submit. Form state, validation, and cross-step state.",
           "**Wallet dApp** — connect a wallet with **viem/wagmi**, read balances and call an **ERC-20 you wrote in Solidity** (mint/transfer), and show live tx status. Ties the Solidity section to a real UI.",
           "**Desktop file/image browser** *(Desktop GUI)* — a list/tree pane + preview pane, **background loading off the UI thread** (`QThread` / goroutine + `fyne.Do` / a channel into `update`), and packaging into a shippable binary. The real test of a GUI toolkit's threading + layout story.",
-          "**2D platformer or top-down shooter** *(Game dev)* — sprites, a tilemap, delta-time movement, AABB collision, a sprite sheet, sound effects, and a title→play→pause→game-over **state machine**. Build in **Pygame** or **SDL/C++**."
+          "**2D platformer or top-down shooter** *(Game dev)* — sprites, a tilemap, delta-time movement, AABB collision, a sprite sheet, sound effects, and a title→play→pause→game-over **state machine**. Build in **Pygame**, **LÖVE** (add `hump.gamestate` + `bump.lua`), or **SDL/C++**."
         ] },
         { type: "callout", variant: "note", text: "The dApp is the one project that spans this whole deck: write & test the contract with **Foundry**, run **anvil** as a local chain, and drive it from a **React/Vue** frontend. It's the fastest way to internalize the frontend↔contract boundary. For the **desktop/game** builds, the equivalent lesson is the **off-thread → UI-thread handoff**: every toolkit here has one blessed way to update the UI from a background worker (Qt signals, `fyne.Do`, egui `request_repaint` + channel) — learn it early." }
       ]

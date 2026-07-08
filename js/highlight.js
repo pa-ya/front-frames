@@ -1,6 +1,6 @@
 /* ============================================================
    highlight.js — tiny dependency-free syntax highlighter
-   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, qml, graphql, func, tact, bash, json, sql, env, http
+   Supports: js, ts, py, go, rust, php, dart, solidity, cpp, qml, lua, graphql, func, tact, bash, json, sql, env, http
    ============================================================ */
 (function () {
   "use strict";
@@ -22,6 +22,7 @@
     func: ["int","cell","slice","builder","cont","tuple","var","impure","inline","inline_ref","method_id","global","const","return","if","ifnot","else","elseif","elseifnot","while","do","until","repeat","forall","asm","type","true","false","null","throw","throw_if","throw_unless","recv_internal","recv_external","begin_cell","end_cell","store_uint","load_uint","get_data","set_data","nil"],
     tact: ["contract","trait","message","struct","fun","get","native","receive","init","let","const","return","if","else","while","repeat","until","do","try","catch","foreach","in","map","bounced","external","import","primitive","with","override","virtual","abstract","extends","mutates","extend","public","as","true","false","null","self","send","require","dump","emit","asm","Int","Bool","Address","Cell","Slice","Builder","String","StringBuilder","Context","SendParameters","StateInit"],
     qml: ["import","property","readonly","default","signal","alias","function","id","if","else","for","while","return","var","let","const","true","false","null","on","as","enum","component","required","pragma"],
+    lua: ["and","break","do","else","elseif","end","false","for","function","goto","if","in","local","nil","not","or","repeat","return","then","true","until","while","self","require","pairs","ipairs","print","type","tostring","tonumber","pcall","error","setmetatable","getmetatable","math","string","table","io","os","love"],
   };
 
   const LANG_SET = {
@@ -49,6 +50,7 @@
     func: new Set(KEYWORDS.func),
     tact: new Set([...KEYWORDS.common, ...KEYWORDS.tact]),
     qml: new Set([...KEYWORDS.common, ...KEYWORDS.qml]),
+    lua: new Set(KEYWORDS.lua),
   };
 
   const HASH_COMMENT = new Set(["py","python","bash","sh","env","yaml","toml","ruby","elixir","dockerfile","http","properties","cmake","perl","r","makefile","gitignore","graphql","gql"]);
@@ -59,10 +61,13 @@
     if (lang === "text" || lang === "plain" || lang === "") return esc(code);
     const kw = LANG_SET[lang] || new Set([...KEYWORDS.common]);
     const hashComment = HASH_COMMENT.has(lang);
+    const dashComment = lang === "lua";                        // Lua uses -- comments
 
     // token master regex — order = priority
     const parts = [
       "(?<block>/\\*[\\s\\S]*?\\*/)",                          // block comment
+      dashComment ? "(?<luablock>--\\[\\[[\\s\\S]*?\\]\\])" : null,  // lua block comment
+      dashComment ? "(?<dash>--.*)" : null,                    // lua line comment
       hashComment ? "(?<hash>#.*)" : null,                     // # comment
       "(?<line>//.*)",                                         // // comment
       "(?<tstr>\"\"\"[\\s\\S]*?\"\"\"|'''[\\s\\S]*?''')",      // triple string (py)
@@ -80,7 +85,7 @@
     let out = "", m;
     while ((m = re.exec(code)) !== null) {
       const g = m.groups;
-      if (g.block || g.line || g.hash) { out += `<span class="tok-com">${esc(m[0])}</span>`; }
+      if (g.block || g.line || g.hash || g.dash || g.luablock) { out += `<span class="tok-com">${esc(m[0])}</span>`; }
       else if (g.tstr) { out += `<span class="tok-str">${esc(m[0])}</span>`; }
       else if (g.str) { out += `<span class="tok-str">${esc(m[0])}</span>`; }
       else if (g.attr) { out += `<span class="tok-fn">${esc(m[0])}</span>`; }
